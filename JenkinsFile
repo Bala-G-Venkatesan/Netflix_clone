@@ -1,0 +1,80 @@
+pipeline {
+    agent any
+    tools {
+        jdk 'jdk17'
+        nodejs 'node16'
+    }
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+        stage('Git Checkout') {
+            steps {
+                git branch:'main', url:'https://github.com/Aj7Ay/Netflix-clone.git'
+
+            }
+        }
+        stage('Scanning via Sonarqube') {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Netflix -Dsonar.projectKey=Netflix '''
+                }
+            }
+        }
+        stage('Quality Gates') {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false
+                }
+            }
+        }
+        stage('Installing Dependency') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('DependencyCheck') {
+            steps {
+                dependencyCheck additionalArguments: '--scan . --disableYarnAudit --disableNodeAudit', odcInstallation: 'Dependency-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+
+        stage('Trivy File Scan') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
+        stage('Build Docker Image and Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
+                        sh 'docker build --build-arg TMDB_V3_API_KEY=a22e327c451fde712026997d83f4771a -t netflix .'
+                        sh 'docker tag netflix balajidevops1/netflix-clone:latest'
+                        sh 'docker push balajidevops1/netflix-clone:latest'
+
+                    }
+                }
+            }
+        }
+        stage('Image Scan Using Trivy') {
+            steps {
+                sh 'trivy image balajidevops1/netflix-clone:latest > trivyimage.txt'
+            }
+        }  
+    }
+    post {
+     always {
+        emailext attachLog: true,
+        subject: "'${currentBuild.result}'",
+        body: "Project: ${env.JOB_NAME}<br/>" + "Build Number: ${env.BUILD_NUMBER}<br/>" + "Build URL: ${env.BUILD_URL}<br/>",
+        to: 'bvenkat769806@gmail.com',
+        attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
+        }
+    }
+}
