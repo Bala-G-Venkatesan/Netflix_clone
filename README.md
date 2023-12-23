@@ -83,6 +83,7 @@ This project showcases a DevSecOps approach to deploying a Netflix Clone using J
 
 8. **Build Docker Image and Push:**
    - Builds the Docker image with necessary configurations and pushes it to Docker Hub.
+   - _Note: The Docker stage has a commented line related to API key. Uncomment and replace `<yourapikey>` with your actual API key when needed.Ensure to follow best practices for handling sensitive information and credentials._
 
 9. **Image Scan Using Trivy:**
    - Performs a Trivy scan on the Docker image to identify vulnerabilities.
@@ -91,6 +92,7 @@ This project showcases a DevSecOps approach to deploying a Netflix Clone using J
 
 - Automated email notifications are configured to provide success/failure feedback.
 - Email attachments include Trivy outputs for image and filesystem scans and build logs.
+- _Note: The notification stage has a commented line for the recipient's email address. Uncomment and replace `<email-id>` with a valid email ID where you want to receive notifications._
 
 <!-- ## Further Documentation -->
 
