@@ -20,6 +20,9 @@ This project showcases a DevSecOps approach to deploying a Netflix Clone using J
   - EKS cluster deployment
   - Argo CD installation using Helm
   - Netflix Clone application deployment
+    
+- **Monitoring:**
+  - Prometheus and Grafana setup for monitoring infrastructure health and performance.
 
 ## Security Measures
 
@@ -39,6 +42,30 @@ This project showcases a DevSecOps approach to deploying a Netflix Clone using J
 
 - **Argo CD:**
   - Handling Continuous Deployment with Argo CD, managing the application deployment on the EKS cluster.
+
+## Monitoring Setup with Prometheus and Grafana
+
+This project includes monitoring capabilities using Prometheus and Grafana:
+
+### Prometheus Overview
+
+Prometheus, an integral part of our monitoring setup, collects and stores various metrics from the EKS cluster nodes and Jenkins server. These metrics provide insights into the health and performance of the infrastructure.
+
+1. **EKS Node Exporter:**
+   - Collects metrics from EKS cluster nodes.
+   - Target: `<eks-node-ip>:9100`
+
+2. **Server Node Exporter:**
+   - Gathers metrics from the Jenkins server.
+   - Target: `<jenkins-server-ip>:9100`
+
+3. **Jenkins Prometheus Exporter:**
+   - Captures Jenkins-specific metrics.
+   - Target: `<jenkins-server-ip>:8080/prometheus`
+
+### Grafana Dashboards
+
+Grafana visually presents Prometheus data, allowing you to monitor and analyze system performance with ease.
 
 ## Getting Started
 
