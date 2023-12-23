@@ -3,6 +3,8 @@
 
 This project showcases a DevSecOps approach to deploying a Netflix Clone using Jenkins for Continuous Integration (CI) and Argo CD for Continuous Deployment (CD). The pipeline ensures security at every stage, from code analysis to container image scanning.
 
+![Netflix Clone Application](placeholder)
+
 ## Project Structure
 
 - **CI Pipeline (Jenkins):**
@@ -56,7 +58,7 @@ This project showcases a DevSecOps approach to deploying a Netflix Clone using J
 ## Notifications
 
 - Automated email notifications are configured to provide success/failure feedback.
-- Attachments include Trivy outputs for image and filesystem scans and dependency check results.
+- Email attachments include Trivy outputs for image and filesystem scans and dependency check results.
 
 <!-- ## Further Documentation -->
 
