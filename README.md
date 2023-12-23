@@ -59,7 +59,7 @@ This project showcases a DevSecOps approach to deploying a Netflix Clone using J
 ## Notifications
 
 - Automated email notifications are configured to provide success/failure feedback.
-- Email attachments include Trivy outputs for image and filesystem scans and dependency check results.
+- Email attachments include Trivy outputs for image and filesystem scans and build logs.
 
 <!-- ## Further Documentation -->
 
