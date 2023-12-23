@@ -16,13 +16,21 @@ This project showcases a DevSecOps approach to deploying a Netflix Clone using J
   - Docker image build and push to Docker Hub
   - Trivy scans for filesystem and Docker image
 
+![Jenkins Pipeline](images/jenkins_buildjob.JPG)
+
 - **CD Deployment (Argo CD):**
   - EKS cluster deployment
   - Argo CD installation using Helm
   - Netflix Clone application deployment
+
+![ArgoCD](images/argocd.JPG)
     
 - **Monitoring:**
   - Prometheus and Grafana setup for monitoring infrastructure health and performance.
+
+![prometheus_monitoring](images/prometheus.JPG)
+![graffana_dashboards1](images/graffana_dash_node.JPG)
+![graffana_dashboards2](images/graffana_dash_jenkins.JPG)
 
 ## Security Measures
 
@@ -121,6 +129,7 @@ Grafana visually presents Prometheus data, allowing you to monitor and analyze s
 - Email attachments include Trivy outputs for image and filesystem scans and build logs.
 - _Note: The notification stage has a commented line for the recipient's email address. Uncomment and replace `<email-id>` with a valid email ID where you want to receive notifications._
 
+![email_notification](images/mail.JPG)
 <!-- ## Further Documentation -->
 
 <!-- - For a more detailed walkthrough and additional insights, check out the accompanying Medium blog post:
