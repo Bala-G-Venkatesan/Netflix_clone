@@ -56,6 +56,37 @@ This project showcases a DevSecOps approach to deploying a Netflix Clone using J
 ### 4. **Deploy with Argo CD:**
    - Use Argo CD to deploy the Netflix Clone application on the EKS cluster.
 
+## Jenkins Pipeline
+
+### Stages
+
+1. **Clean Workspace:**
+   - Deletes the workspace to start with a clean environment.
+
+2. **Git Checkout:**
+   - Checks out the code from the main branch of the GitHub repository.
+
+3. **Scanning via SonarQube:**
+   - Analyzes the code using SonarQube for static code analysis.
+
+4. **Quality Gates:**
+   - Waits for the SonarQube Quality Gate to pass.
+
+5. **Installing Dependency:**
+   - Installs project dependencies using npm.
+
+6. **DependencyCheck:**
+   - Scans dependencies for known vulnerabilities using DependencyCheck.
+
+7. **Trivy File System Scan:**
+   - Performs a Trivy scan on the file system to identify vulnerabilities.
+
+8. **Build Docker Image and Push:**
+   - Builds the Docker image with necessary configurations and pushes it to Docker Hub.
+
+9. **Image Scan Using Trivy:**
+   - Performs a Trivy scan on the Docker image to identify vulnerabilities.
+
 ## Notifications
 
 - Automated email notifications are configured to provide success/failure feedback.
